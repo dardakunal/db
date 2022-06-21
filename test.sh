@@ -18,9 +18,11 @@ read ch
 #Based on choice creating db instance
 case $ch in
  "1")
-        echo "Creating mysqldb instance using helm chart"
+        echo "Enter the relase Name"
+        read release_name
+        echo "Creating $release_name mysqldb instance using helm chart"
         echo "==================================================================================="
-        helm install mysqldb-app $HELM_CHART_HOME/mysqldb
+        helm install $release_name $HELM_CHART_HOME/mysql
         sleep 5
         echo "==================================================================================="
         kubectl get all | grep mysql
