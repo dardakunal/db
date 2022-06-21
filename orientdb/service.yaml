@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "orientdb.fullname" . }}
+  labels:
+    {{- include "orientdb.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port1 }}
+      targetPort: {{ .Values.service.port1 }}
+      nodePort: 30002
+      protocol: TCP
+      name: http
+    - port: {{ .Values.service.port2 }}
+      targetPort: {{ .Values.service.port2 }}
+      nodePort: 30003
+      name: binary
+  selector:
+    {{- include "orientdb.selectorLabels" . | nindent 4 }}
